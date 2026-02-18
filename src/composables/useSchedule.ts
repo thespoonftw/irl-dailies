@@ -42,7 +42,14 @@ function getMonthlyDowDate(year: number, month: number, ordinal: string, day: st
 
 export function isDueToday(task: Task, dateOverride?: string): boolean {
   const now = getLogicalDate(dateOverride)
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
   const dayName = allWeekDays[(now.getDay() + 6) % 7]
+
+  // No task is due before its start date
+  if (task.startDate) {
+    const start = new Date(task.startDate + 'T00:00:00')
+    if (today < start) return false
+  }
 
   switch (task.frequency) {
     case 'daily':

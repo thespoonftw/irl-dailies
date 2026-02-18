@@ -40,3 +40,4 @@ android/build
 android/capacitor-cordova-android-plugins/build
 android/app/src/main/assets/public
 android/local.properties
+android/app/release

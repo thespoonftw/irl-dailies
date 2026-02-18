@@ -47,23 +47,21 @@ export function useNotifications() {
 
       if (startNotification.value) {
         const [h, m] = startNotificationTime.value.split(':').map(Number)
-        const at = nextOccurrence(h, m)
         notifications.push({
           id: START_ID,
           title: "Today's dailies:",
           body,
-          schedule: { at, every: 'day' as any, allowWhileIdle: true },
+          schedule: { on: { hour: h, minute: m }, allowWhileIdle: true },
         })
       }
 
       if (endNotification.value) {
         const [h, m] = endNotificationTime.value.split(':').map(Number)
-        const at = nextOccurrence(h, m)
         notifications.push({
           id: END_ID,
           title: 'Incomplete dailies:',
           body,
-          schedule: { at, every: 'day' as any, allowWhileIdle: true },
+          schedule: { on: { hour: h, minute: m }, allowWhileIdle: true },
         })
       }
 
@@ -87,14 +85,4 @@ export function useNotifications() {
 
   // Initial schedule
   refresh()
-}
-
-/** Returns a Date for the next occurrence of the given hour:minute (today if not yet passed, otherwise tomorrow). */
-function nextOccurrence(hour: number, minute: number): Date {
-  const now = new Date()
-  const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour, minute, 0, 0)
-  if (target <= now) {
-    target.setDate(target.getDate() + 1)
-  }
-  return target
 }

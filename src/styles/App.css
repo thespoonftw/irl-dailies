@@ -505,6 +505,17 @@
   padding-left: 1.25rem;
 }
 
+.settings-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.85em;
+  font-family: inherit;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .settings-version {
   text-align: center;
   opacity: 0.4;
